@@ -16,11 +16,11 @@ and open the template in the editor.
 
             .cellule{
                 transform: rotateY(180deg);
-                border-radius: 20px;
-                min-height: 100px;
-                min-width: 100px;
+                border-radius: 5px;
+                min-height: 50px;
+                min-width: 50px;
                 background-color: purple;
-                margin: 20px;
+                margin: 10px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -94,11 +94,24 @@ and open the template in the editor.
             } while (hauteurTab % 2 != 0 || hauteurTab <= 0);
 
             // 1bis Génére tableau valeurs non aléat
-            var tabTrie = [];
-            for (var i = 0; i < hauteurTab * hauteurTab / 2; i++) {
-                tabTrie[i] = i;
-                tabTrie[(hauteurTab * hauteurTab / 2) + i] = i;
+            var tabAleat = [];
+            for(var i=0;i<hauteurTab * hauteurTab;i++){
+                var aleat = Math.random()*hauteurTab * hauteurTab/2;
+                var aleat = Math.floor(aleat);
+                
+                var i1 = tabAleat.indexOf(aleat);
+                var i2 = tabAleat.lastIndexOf(aleat);
+                if( (i1==-1 && i2==-1) || (i1==i2) ){
+                    tabAleat.push(aleat);
+                }
             }
+            
+            
+//            var tabTrie = [];
+//            for (var i = 0; i < hauteurTab * hauteurTab / 2; i++) {
+//                tabTrie[i] = i;
+//                tabTrie[(hauteurTab * hauteurTab / 2) + i] = i;
+//            }
 
             // 2. Génère le tableau
             var htmlGenere = "";
@@ -108,7 +121,7 @@ and open the template in the editor.
 
                 for (var j = 0; j < hauteurTab; j++) {
 
-                    htmlGenere += "<div class='cellule' onclick='clic(this)' valeur='" + tabTrie.pop() + "'></div>";
+                    htmlGenere += "<div class='cellule' onclick='clic(this)' valeur='" + tabAleat.pop() + "'></div>";
                 }
 
                 htmlGenere += "</div>";
