@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .ligne{
+                display: flex;
+            }
+
+            .cellule{
+                transform: rotateY(180deg);
+                border-radius: 20px;
+                min-height: 100px;
+                min-width: 100px;
+                background-color: purple;
+                margin: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .selectionne{
+                transform: rotateY(360deg);
+                background-color: green;
+                transition: transform 1s;
+                font-size: 50px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="tableau"></div>
+        <script>
+
+            var carte1 = null;
+            var carte2 = null;
+            var nbCartesTrouve = 0;
+            var hauteurTab = 0;
+            var compteurEssais = 0;
+
+            function clic(tag) {
+                
+                if (carte1 == null) {// Aucune carte visivke
+
+                    tag.innerHTML = tag.getAttribute("valeur");
+                    tag.classList.add("selectionne");
+                    carte1 = tag;
+
+                } else if (carte2 == null) {// Carte 1 visible et 2 invisible
+
+                    if (carte1 == tag) {
+                        return;
+                    }
+
+                    tag.innerHTML = tag.getAttribute("valeur");
+                    tag.classList.add("selectionne");
+                    carte2 = tag;
+
+                } else {// Les 2 cartes sont déjà visibles
+                    compteurEssais++;
+                    if (carte1.getAttribute("valeur") == carte2.getAttribute("valeur")) {// Trouvé une paire
+
+                        carte1.style.visibility = "hidden";
+                        carte2.style.visibility = "hidden";
+
+                        nbCartesTrouve++;
+
+                        if (nbCartesTrouve == hauteurTab*hauteurTab/2 ){
+                            alert("Bravo, partie gagnée en " + compteurEssais + " essais !");
+                        }
+                    } else {// Raté!
+
+                        carte1.classList.remove("selectionne");
+                        carte2.classList.remove("selectionne");
+                        carte1.innerHTML = "";
+                        carte2.innerHTML = "";
+                    }
+
+                    carte1 = null;
+                    carte2 = null;
+                }
+            }
+
+            // 1. Demande à l'utilisateur nbre lignes et colonnes du tab
+            do {
+                hauteurTab = prompt("Hauteur du tableau ?");
+            } while (hauteurTab % 2 != 0 || hauteurTab <= 0);
+
+            // 1bis Génére tableau valeurs non aléat
+            var tabTrie = [];
+            for (var i = 0; i < hauteurTab * hauteurTab / 2; i++) {
+                tabTrie[i] = i;
+                tabTrie[(hauteurTab * hauteurTab / 2) + i] = i;
+            }
+
+            // 2. Génère le tableau
+            var htmlGenere = "";
+            for (var i = 0; i < hauteurTab; i++) {
+
+                htmlGenere += "<div class='ligne'>";
+
+                for (var j = 0; j < hauteurTab; j++) {
+
+                    htmlGenere += "<div class='cellule' onclick='clic(this)' valeur='" + tabTrie.pop() + "'></div>";
+                }
+
+                htmlGenere += "</div>";
+            }
+
+            // 3. Placer le htmlGeneré ds mon div
+            document.getElementById("tableau").innerHTML = htmlGenere;
+
+        </script>
+    </body>
+</html>

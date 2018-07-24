@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script type="text/javascript">
+
+            function replaceAtIndex(mot, i, lettre) {
+
+                // Abc***123
+                var motARetourner = mot.substring(0, i) + lettre + mot.substring(i, mot.length-1);
+                return motARetourner;
+            }
+
+            // 1. Définir dictionnaire
+            var mots = ["parler", "jouer", "danser", "dormir"];
+
+            // 2. Choix aléat du mot
+            var indiceMotSecret = Math.random() * mots.length;
+            indiceMotSecret = Math.floor(indiceMotSecret);
+            var motSecret = mots[ indiceMotSecret ];
+
+            // 2bis. Crée motChiffré avec 1ère lettre visible
+            var motChiffre = new Array(motSecret.length).fill("*").join("");
+            motChiffre[0] = motSecret.charAt(0);
+
+            // 3. On itère tant que l'utilisateur n'a pas trouvé le mot secret
+            do {
+                // 1. Saisir le mot
+                var motTape = prompt("Votre mot (actuellement: " + motChiffre + " )");
+
+                // 2. Comparer lettre par lettre avec mot secret, et construit la différer
+                for (var i = 0; i < motSecret.length; i++) {
+
+                    // Remplace nouvelles lettre découvertes
+                    if ( motChiffre[i]==="*" &&  motTape[i] === motSecret[i]) {
+
+                        motChiffre = replaceAtIndex(motChiffre, i, motSecret[i]);
+                    }
+                }
+                
+                // 3. Affiche résultat à l'utilisateur
+                alert("Résultat:" + motChiffre);
+            } while (motTape !== motSecret );
+        </script>
+    </body>
+</html>

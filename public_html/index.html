@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script>
+
+            function filtrePaysGagnants(pays) {
+
+                var paysPerdantsDOffice = ['belgique', 'senegal', 'vatican', 'djibouti', 'cuba', 'usa'];
+
+                for (var i in paysPerdantsDOffice) {
+                    if (paysPerdantsDOffice[i].toLowerCase() === pays.toLowerCase())
+                        return false;
+                }
+
+                return true;
+
+            }
+
+//                return  pays!=='belgique' && 
+//                    pays!=='senegal' &&
+//                    pays!=='vatican' &&
+//                    pays!=='djibouti' &&
+//                    pays!=='cuba' &&
+//                    pays!=='usa';
+
+            function filtreNombrePremier(n) {
+
+                if (n < 1)
+                    return false;
+
+                for (i = n - 1; i > 1; i--) {
+                    if (n % i == 0)
+                        return false;
+                }
+
+                return true;
+            }
+
+            var filtreAntiVoyelles = function (lettre) {
+                if (lettre == 'a' || lettre == 'e' || lettre == 'i' || lettre == 'o' || lettre == 'u' || lettre == 'y') {
+                    return false;
+                } else {
+                    return true;
+                }
+            };
+
+        </script>
+    </body>
+</html>
