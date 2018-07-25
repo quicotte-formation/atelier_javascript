@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+            <div>
+                <label>Pseudo</label>
+                <input name="pseudo">
+            </div>
+            <div>
+                <label>Mail</label>
+                <input name="email">
+            </div>
+            <div>
+                <label>Mdp 1</label>
+                <input type="password" name="mdp1">
+            </div>
+            <div>
+                <label>Mdp 2</label>
+                <input type="password" name="mdp2">
+            </div>
+            <div>
+                <button>Je m'inscris</button>
+            </div>
+        <div>TODO write content</div>
+        <script src="JS/jquery-3.3.1.js" type="text/javascript"></script>
+        <script>
+            function valider(){
+                
+                // Valider que mdp 3 et 3 car
+                var mdp1 = $('[name=mdp1]').val();
+                if( mdp1.length<3 || mdp1.length>8 ){
+                    alert('Le mot-de-passe doit contenir entre 3 et 8 car');
+                }
+                
+                // Valide que mdp1 et mdp2 identique
+                if( mdp1!=$('[name=mdp2]').val() ){
+                    alert('Mdp1 et 2 doivent être identiques');
+                }
+                
+                // Valider email:  aaaaaa@aaa.aaa
+                var email = $('[name=email]').val();
+                if( ! email.match("[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+") ){
+                    alert('Email invalide!');
+                }
+            }
+            
+            $('button').click( valider );
+        </script>
+    </body>
+</html>
