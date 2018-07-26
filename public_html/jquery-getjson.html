@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOM</th>
+                        <th>MASSE</th>
+                        <th>CLASSE</th>
+                        <th>ANNEE</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <script src="JS/jquery-3.3.1.js" type="text/javascript"></script>
+        <script>
+
+            function formatteDate(index, elemDuDom){
+                
+                var objJQuery = $(elemDuDom);
+                objJQuery.html( objJQuery.html().substring(0,10) );
+                
+                // OU AUSSI
+//                var date = $(elemDuDom).html();
+//                date = date.substring(0,10);
+//                $(elemDuDom).html(date);
+            }
+
+            function remplaceUndefined(index, elemDuDom){
+                
+                if( $(elemDuDom).html()=='undefined' || $(elemDuDom).html()=='Unknown' ){
+                    $(elemDuDom).html("*** INCONNU ***");
+                }
+            }
+
+            function maFonctionDeCallback(tab) {
+
+                var htmlGenere = "";
+                for (var i in tab) {
+                    
+                    var meteoriteAct = tab[i];
+                    
+                    htmlGenere += "<tr>";
+                    htmlGenere += "<td>" + meteoriteAct.id + "</td>";
+                    htmlGenere += "<td>" + meteoriteAct.name + "</td>";
+                    htmlGenere += "<td>" + meteoriteAct.mass + "</td>";
+                    htmlGenere += "<td>" + meteoriteAct.recclass + "</td>";
+                    htmlGenere += "<td>" + meteoriteAct.year + "</td>";
+                    htmlGenere += "</tr>";
+                }
+                
+                $('tbody').html( htmlGenere );
+                
+                // mon document est affiché complètement
+                
+                $('td').each( remplaceUndefined );
+                $('td:nth-of-type(5)').each( formatteDate )
+            }
+
+            $.getJSON('JSON/meteorite.json', maFonctionDeCallback);
+            
+        </script>
+    </body>
+</html>
