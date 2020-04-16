@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script>
+            var genereNombrePair = function (maximum) {
+
+                var nombre = Math.round(Math.random() * maximum);
+
+                return new Promise(function (thenFunction, catchFunction) {
+                    if (nombre % 2 == 0) {
+                        thenFunction(nombre);
+                    } else {
+                        catchFunction(nombre);
+                    }
+                });
+            }
+            
+            genereNombrePair(10).then( function(res){
+                console.log( `${res} est pair` );
+            } ).catch( function(res){
+                console.log( `ERREUR : ${res} est impair !!!` )
+            } );
+        </script>
+    </body>
+</html>
